@@ -1,31 +1,41 @@
 #include <stdio.h>
-int search(int arr[],int n,int target) {
-    for(int i=0;i<n;i++) {
-        if(arr[i]==target) {
-            return i;
-        }
-    }
-    return -1;
-}
 
 int main() {
     int n;
-    printf("Moi ban nhap so luong phan tu vao mang:");
-    scanf("%d",&n);
-    int arr[n];
-    for(int i=0;i<n;i++) {
-        printf("Nhap phan tu thu %d:",i+1);
-        scanf("%d",&arr[i]);
-    }
-    int target;
-    printf("Nhap phan tu ban muon tim: ");
-    scanf("%d",&target);
-    int result=search(arr,n,target);
-    if(result==-1) {
-        printf("Khong thay phan tu trong mang");
-    }else {
-        printf("Da tim thay phan tu o vi tri %d",result+1);
-    }
-    return 0;
 
+    // Nhập số lượng phần tử mảng
+    do {
+        printf("Nhap so luong phan tu n (0 < n < 1000): ");
+        scanf("%d", &n);
+    } while (n <= 0 || n >= 1000);
+
+    int arr[n];
+
+    // Nhập các phần tử trong mảng
+    printf("Nhap %d phan tu:\n", n);
+    for (int i = 0; i < n; i++) {
+        printf("arr[%d] = ", i);
+        scanf("%d", &arr[i]);
+    }
+
+    // Nhập giá trị cần tìm kiếm
+    int search;
+    printf("Nhap gia tri can tim: ");
+    scanf("%d", &search);
+
+    // Tìm kiếm tuyến tính
+    int found = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == search) {
+            printf("Gia tri %d nam o vi tri thu %d\n", search, i + 1); // vị trí bắt đầu từ 1
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Khong ton tai phan tu %d trong mang.\n", search);
+    }
+
+    return 0;
 }

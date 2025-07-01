@@ -1,35 +1,55 @@
-//
-// Created by Admin on 7/1/2025.
-//
 #include <stdio.h>
 
-void bubble_sort(int a[],int n){
-    for(int i=0;i<n-1;i++) {
-        for(int j=0;j<n-i-1;j++) {
-            if(a[j]>a[j+1]) {
-                int temp=a[j];
-                a[j]=a[j+1];
-                a[j+1]=temp;
+void bubbleSort(int arr[], int n) {
+    // Thuật toán sắp xếp nổi bọt
+    for (int i = 0; i < n - 1; i++) {
+        int swapped = 0; // Biến kiểm tra nếu đã sắp xếp
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Hoán đổi
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = 1;
             }
         }
+        // Nếu không hoán đổi, mảng đã sắp xếp
+        if (swapped == 0)
+            break;
     }
 }
 
 int main() {
     int n;
-    printf("Enter number of elements: ");
+
+    printf("Nhap so luong phan tu (0 < n < 1000): ");
     scanf("%d", &n);
-    if(n<=0||n>=1000) {
-        printf("Invalid Input");
-        return 1;
+
+    // Kiểm tra tính hợp lệ của n
+    if (n <= 0 || n >= 1000) {
+        printf("So luong phan tu khong hop le\n");
+        return 0;
     }
+
     int arr[n];
+
+    // Nhập phần tử của mảng
+    printf("Nhap %d phan tu:\n", n);
     for (int i = 0; i < n; i++) {
-        printf("Enter element %d: ", i + 1);
+        printf("arr[%d] = ", i);
+        scanf("%d", &arr[i]);
     }
-    bubble_sort(arr, n);
+
+    // Gọi hàm sắp xếp nổi bọt
+    bubbleSort(arr, n);
+
+    // In mảng đã sắp xếp
+    printf("Mang sau khi sap xep: [ ");
     for (int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
+        printf("%d", arr[i]);
+        if (i < n - 1) printf(", ");
     }
+    printf(" ]\n");
+
     return 0;
 }

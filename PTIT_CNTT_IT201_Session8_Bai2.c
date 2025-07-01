@@ -1,46 +1,50 @@
 #include <stdio.h>
 
-int main() {
-    int arr[100];
-    int value;
-    int n;
-    int temp;
-    printf("Moi ban nhap so gia tri trong mang:");
-    scanf("%d",&n);
-    for (int i=0;i<n;i++) {
-        printf("Moi ban nhap gia tri vao mang: ");
-        scanf("%d",&arr[i]);
+// Hàm tìm kiếm nhị phân
+int binarySearch(int arr[], int n, int target) {
+    int left = 0, right = n - 1;
+
+    while (left <= right) {
+        int mid = (left + right) / 2;
+
+        if (arr[mid] == target)
+            return mid; // Tìm thấy, trả về chỉ số
+        else if (arr[mid] < target)
+            left = mid + 1;
+        else
+            right = mid - 1;
     }
-    printf("Moi ban nhap gia tri can tim:");
-    scanf("%d",&value);
-    for (int i=0;i<n-1;i++) {
-        for (int j=0;j<n-i-1;j++) {
-            if (arr[j]>arr[j+1]) {
-                temp=arr[j];
-                arr[j]=arr[j+1];
-                arr[j+1]=temp;
-            }
-        }
-    }
-    int left=0;
-    int right=n-1;
-    int found=-1;
-    while(left<=right) {
-        int mid=(left+right)/2;
-        if (arr[mid]==value) {
-            found=mid;
-            break;
-        }else if (arr[mid]>value) {
-            right=mid-1;
-        }
-        else {
-            left=mid+1;
-        }
-    }
-    if (found!=-1) {
-        printf("Phan tu co trong mang");
-    } else {
-        printf("Phan tu khong co trong mang");
-    }
-    return 0;
+
+    return -1; // Không tìm thấy
 }
+
+int main() {
+    int n;
+
+    // Nhập số lượng phần tử mảng
+    do {
+        printf("Nhap so luong phan tu n (0 < n < 1000): ");
+        scanf("%d", &n);
+    } while (n <= 0 || n >= 1000);
+
+    int arr[n];
+
+    // Nhập các phần tử của mảng
+    printf("Nhap %d phan tu da sap xep tang dan:\n", n);
+    for (int i = 0; i < n; i++) {
+        printf("arr[%d] = ", i);
+        scanf("%d", &arr[i]);
+    }
+
+    // Nhập giá trị cần tìm
+    int search;
+    printf("Nhap gia tri can tim: ");
+    scanf("%d", &search);
+
+    // Gọi hàm tìm kiếm nhị phân
+    int result = binarySearch(arr, n, search);
+
+    if (result != -1) {
+        printf("Phan tu %d nam o vi tri thu %d\n", search, result + 1); // Đếm từ 1
+    } else {
+        pri
